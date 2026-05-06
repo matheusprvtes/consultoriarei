@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Living Design System — Agência Rei</title>
+  <meta name="description"
+    content="Design System & Pattern Library da Agência Rei. Componentes canônicos, tipografia, cores, e padrões de interação.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-blue': '#0f1b4e',
+            'brand-blue-light': '#162263',
+            'brand-blue-dark': '#0a1238',
+            'brand-gold': '#ffaa17',
+            'brand-gold-light': '#ffc44d',
+          },
+          fontFamily: {
+            heading: ['Epilogue', 'sans-serif'],
+            body: ['Roboto', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+
+  <style>
+    body {
+      background-color: #0f1b4e;
+      color: #e2e8f0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Epilogue', sans-serif;
+    }
+
+    /* Text glow */
+    .text-glow {
+      text-shadow: 0 0 40px rgba(255, 170, 23, 0.15), 0 0 80px rgba(255, 170, 23, 0.05);
+    }
+
+    /* Background grid pattern */
+    .bg-grid {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 4rem 4rem;
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered children animations */
+    .reveal-child {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-child.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glassmorphism card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Color swatch hover */
+    .swatch {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+
+    .swatch:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Button glow */
+    .btn-glow {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .btn-glow::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, rgba(255, 170, 23, 0.4), transparent, rgba(255, 170, 23, 0.2));
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-glow:hover::after {
+      opacity: 1;
+    }
+
+    /* Smooth nav active indicator */
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #ffaa17;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Ambient glow blobs */
+    .glow-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      opacity: 0.15;
+    }
+
+    /* Pulse animation */
+    @keyframes pulse-gold {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .animate-pulse-gold {
+      animation: pulse-gold 2s ease-in-out infinite;
+    }
+
+    /* Floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Section separator */
+    .section-separator {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Input focus glow */
+    input:focus, select:focus {
+      outline: none;
+      border-color: rgba(255, 170, 23, 0.5) !important;
+      box-shadow: 0 0 0 3px rgba(255, 170, 23, 0.1);
+    }
+
+    /* Smooth scroll for anchors */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a1238;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 170, 23, 0.3);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 170, 23, 0.5);
+    }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-brand-gold/20">
+
+  <!-- Background Grid -->
+  <div class="fixed inset-0 z-0 bg-grid pointer-events-none"></div>
+
+  <!-- Navigation -->
+  <nav class="z-50 sticky top-0 bg-brand-blue/70 w-full border-b border-white/5 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+
+      <!-- Logo in nav (small) -->
+      <a href="#ds-hero" class="flex items-center gap-3 group">
+        <img src="./assets/MARCA-AGENCIA-REI.svg"
+          alt="Agência Rei" class="h-10 transition-transform duration-300 group-hover:scale-105">
+      </a>
+
+      <!-- Nav links -->
+      <div class="hidden md:flex items-center gap-8 text-xs font-medium tracking-widest text-slate-400 uppercase">
+        <a class="nav-link active text-white hover:text-white transition-colors" href="#ds-hero">Hero</a>
+        <a class="nav-link hover:text-white transition-colors" href="#ds-typography">Typography</a>
+        <a class="nav-link hover:text-white transition-colors" href="#ds-colors">Colors</a>
+        <a class="nav-link hover:text-white transition-colors" href="#ds-components">Components</a>
+        <a class="nav-link hover:text-white transition-colors" href="#ds-layout">Layout</a>
+        <a class="nav-link hover:text-white transition-colors" href="#ds-motion">Motion</a>
+        <a class="nav-link hover:text-white transition-colors" href="#ds-icons">Icons</a>
+      </div>
+
+      <!-- Mobile Menu button -->
+      <button class="md:hidden text-white" id="mobile-menu-btn">
+        <iconify-icon icon="solar:hamburger-menu-bold-duotone" width="24"></iconify-icon>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-brand-blue/95 backdrop-blur-xl border-t border-white/5 px-6 py-4">
+      <div class="flex flex-col gap-4 text-sm font-medium text-slate-400 uppercase tracking-wider">
+        <a class="hover:text-white transition-colors py-2" href="#ds-hero">Hero</a>
+        <a class="hover:text-white transition-colors py-2" href="#ds-typography">Typography</a>
+        <a class="hover:text-white transition-colors py-2" href="#ds-colors">Colors</a>
+        <a class="hover:text-white transition-colors py-2" href="#ds-components">Components</a>
+        <a class="hover:text-white transition-colors py-2" href="#ds-layout">Layout</a>
+        <a class="hover:text-white transition-colors py-2" href="#ds-motion">Motion</a>
+        <a class="hover:text-white transition-colors py-2" href="#ds-icons">Icons</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ========== HERO SECTION ========== -->
+  <header id="ds-hero" class="relative z-10 overflow-hidden border-b border-white/5 pt-16 pb-32">
+
+    <!-- Ambient glows -->
+    <div class="glow-blob w-[500px] h-[500px] bg-brand-gold top-[-100px] left-1/2 -translate-x-1/2"></div>
+    <div class="glow-blob w-[300px] h-[300px] bg-blue-500 bottom-[-50px] right-[10%] opacity-10"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative">
+
+      <!-- Centered Logo -->
+      <div class="flex justify-center mb-16 reveal">
+        <div class="relative group">
+          <div class="absolute inset-0 bg-brand-gold/10 blur-[60px] rounded-full group-hover:bg-brand-gold/20 transition-all duration-700"></div>
+          <img src="./assets/MARCA-AGENCIA-REI.svg"
+            alt="Agência Rei"
+            class="relative w-64 md:w-80 animate-float transition-transform duration-500 group-hover:scale-105 drop-shadow-2xl">
+        </div>
+      </div>
+
+      <!-- Hero text -->
+      <div class="max-w-3xl mx-auto text-center reveal">
+
+        <!-- Status badge -->
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <span class="inline-flex w-2 h-2 rounded-full animate-pulse-gold bg-brand-gold"></span>
+          <span class="text-xs font-medium tracking-widest uppercase text-brand-gold-light">
+            Living Design System
+          </span>
+        </div>
+
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter leading-[0.9] text-white mb-8 text-glow">
+          Design System
+          <br>
+          <span class="text-brand-gold">&</span> Pattern
+          <br>
+          Library
+        </h1>
+
+        <p class="text-lg text-slate-400 max-w-md mx-auto leading-relaxed mb-10 font-light">
+          Canonical components, layouts, and styles. A comprehensive guide to our visual language.
+        </p>
+
+        <a href="#ds-typography"
+          class="btn-glow inline-flex items-center gap-2 bg-brand-gold text-brand-blue-dark font-semibold px-8 py-4 rounded-lg text-sm tracking-wider uppercase hover:bg-brand-gold-light hover:shadow-lg hover:shadow-brand-gold/25 transition-all duration-300">
+          <iconify-icon icon="solar:layers-minimalistic-bold-duotone" width="18"></iconify-icon>
+          Explore the System
+        </a>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="flex justify-center mt-20 reveal">
+        <a href="#ds-typography" class="text-white/30 hover:text-white/60 transition-colors">
+          <iconify-icon icon="solar:alt-arrow-down-linear" width="28" class="animate-bounce"></iconify-icon>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ========== TYPOGRAPHY ========== -->
+  <section id="ds-typography" class="relative z-10 section-separator py-24">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Section header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 reveal">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-4 text-xs font-medium tracking-widest uppercase mb-4 text-brand-gold">
+            <span class="w-8 h-[1px] bg-brand-gold"></span>
+            Section 01
+          </div>
+          <h2 class="text-4xl md:text-5xl font-medium text-white tracking-tight leading-none mb-4">
+            Typography
+          </h2>
+          <p class="text-lg text-slate-400 leading-relaxed font-light">
+            Core typefaces, sizes, and weights used across the project.
+          </p>
+        </div>
+      </div>
+
+      <!-- Typography cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-white/5 border border-white/5 overflow-hidden reveal">
+
+        <!-- Headings card -->
+        <div class="bg-brand-blue p-10 group hover:bg-white/[0.02] transition-colors">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 text-brand-gold group-hover:border-brand-gold/50 transition-colors">
+              <iconify-icon icon="solar:text-bold-bold-duotone" width="18"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Headings</h3>
+              <p class="text-xs text-slate-500">Epilogue · 500 / 700</p>
+            </div>
+          </div>
+
+          <div class="space-y-3 font-heading">
+            <h1 class="text-4xl font-semibold text-white tracking-tight">Heading 1</h1>
+            <h2 class="text-3xl font-medium text-white/90 tracking-tight">Heading 2</h2>
+            <h3 class="text-2xl font-medium text-white/80 tracking-tight">Heading 3</h3>
+            <h4 class="text-xl font-medium text-white/70">Heading 4</h4>
+            <h5 class="text-lg font-medium text-white/60">Heading 5</h5>
+          </div>
+        </div>
+
+        <!-- Body text card -->
+        <div class="bg-brand-blue p-10 group hover:bg-white/[0.02] transition-colors">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 text-brand-gold group-hover:border-brand-gold/50 transition-colors">
+              <iconify-icon icon="solar:document-text-bold-duotone" width="18"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Paragraphs & Lead</h3>
+              <p class="text-xs text-slate-500">Roboto · 300 / 500</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <p class="text-xl text-slate-300 leading-relaxed font-light">
+              A slightly larger, leading paragraph style used for emphasis and introductions.
+            </p>
+            <p class="text-base text-slate-400 leading-relaxed font-light">
+              Standard body text preview for regular content blocks. This font is clear, highly readable, and
+              perfectly balanced for long formatting. <strong class="text-white font-medium">This is bold text natively styled.</strong>
+            </p>
+            <p class="text-sm text-slate-500 leading-relaxed">
+              Small auxiliary text used for captions, labels, and metadata throughout the system.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== COLORS & SURFACES ========== -->
+  <section id="ds-colors" class="relative z-10 section-separator py-24">
+
+    <!-- Ambient glow -->
+    <div class="glow-blob w-[400px] h-[400px] bg-brand-gold top-1/2 right-0 -translate-y-1/2 opacity-5"></div>
+
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Section header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 reveal">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-4 text-xs font-medium tracking-widest uppercase mb-4 text-brand-gold">
+            <span class="w-8 h-[1px] bg-brand-gold"></span>
+            Section 02
+          </div>
+          <h2 class="text-4xl md:text-5xl font-medium text-white tracking-tight leading-none mb-4">
+            Colors & Surfaces
+          </h2>
+          <p class="text-lg text-slate-400 leading-relaxed font-light">
+            Primary brand colors, secondary accents, and background surfaces.
+          </p>
+        </div>
+      </div>
+
+      <!-- Color swatches -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
+
+        <!-- Primary Gold -->
+        <div class="group cursor-pointer reveal-child">
+          <div class="swatch h-32 md:h-40 rounded-2xl mb-4 relative overflow-hidden" style="background-color: #ffaa17;">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute bottom-3 right-3 bg-white/20 backdrop-blur-sm px-2 py-1 rounded text-xs text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Copied!
+            </div>
+          </div>
+          <h5 class="text-sm font-semibold text-white uppercase tracking-wider">Primary</h5>
+          <p class="text-xs text-slate-500 font-mono">#ffaa17</p>
+        </div>
+
+        <!-- Secondary Blue -->
+        <div class="group cursor-pointer reveal-child" style="transition-delay: 100ms;">
+          <div class="swatch h-32 md:h-40 rounded-2xl mb-4 relative overflow-hidden border border-white/10" style="background-color: #0f1b4e;">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <h5 class="text-sm font-semibold text-white uppercase tracking-wider">Secondary</h5>
+          <p class="text-xs text-slate-500 font-mono">#0f1b4e</p>
+        </div>
+
+        <!-- Light BG -->
+        <div class="group cursor-pointer reveal-child" style="transition-delay: 200ms;">
+          <div class="swatch h-32 md:h-40 rounded-2xl mb-4 relative overflow-hidden" style="background-color: #f1f1f1;">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <h5 class="text-sm font-semibold text-white uppercase tracking-wider">Light BG</h5>
+          <p class="text-xs text-slate-500 font-mono">#f1f1f1</p>
+        </div>
+
+        <!-- White Surface -->
+        <div class="group cursor-pointer reveal-child" style="transition-delay: 300ms;">
+          <div class="swatch h-32 md:h-40 rounded-2xl mb-4 relative overflow-hidden" style="background-color: #ffffff;">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <h5 class="text-sm font-semibold text-white uppercase tracking-wider">White Surface</h5>
+          <p class="text-xs text-slate-500 font-mono">#ffffff</p>
+        </div>
+      </div>
+
+      <!-- Gradient bar -->
+      <div class="mt-12 reveal">
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Brand Gradient</h4>
+          <div class="h-16 rounded-xl" style="background: linear-gradient(135deg, #0f1b4e 0%, #162263 40%, #ffaa17 100%);"></div>
+          <p class="text-xs text-slate-500 mt-3 font-mono">linear-gradient(135deg, #0f1b4e, #162263, #ffaa17)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== UI COMPONENTS ========== -->
+  <section id="ds-components" class="relative z-10 section-separator py-24">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Section header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 reveal">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-4 text-xs font-medium tracking-widest uppercase mb-4 text-brand-gold">
+            <span class="w-8 h-[1px] bg-brand-gold"></span>
+            Section 03
+          </div>
+          <h2 class="text-4xl md:text-5xl font-medium text-white tracking-tight leading-none mb-4">
+            UI Components
+          </h2>
+          <p class="text-lg text-slate-400 leading-relaxed font-light">
+            Buttons, cards, and interactive form elements.
+          </p>
+        </div>
+      </div>
+
+      <!-- Buttons grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 border border-white/5 overflow-hidden mb-8 reveal">
+
+        <!-- Buttons -->
+        <div class="bg-brand-blue p-10">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-8 flex items-center gap-2">
+            <iconify-icon icon="solar:cursor-bold-duotone" width="16" class="text-brand-gold"></iconify-icon>
+            Buttons
+          </h4>
+
+          <div class="flex flex-wrap gap-4">
+            <!-- Primary Button -->
+            <button class="btn-glow bg-brand-gold text-brand-blue-dark font-semibold px-6 py-3 rounded-lg text-sm tracking-wider uppercase hover:bg-brand-gold-light hover:shadow-lg hover:shadow-brand-gold/25 transition-all duration-300">
+              Primary Action
+            </button>
+
+            <!-- Outline Button -->
+            <button class="border-2 border-brand-gold text-brand-gold font-semibold px-6 py-3 rounded-lg text-sm tracking-wider uppercase hover:bg-brand-gold hover:text-brand-blue-dark transition-all duration-300">
+              Outline Action
+            </button>
+
+            <!-- Secondary Button -->
+            <button class="bg-white/5 border border-white/10 text-white font-semibold px-6 py-3 rounded-lg text-sm tracking-wider uppercase hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-sm">
+              Secondary
+            </button>
+
+            <!-- Small Button -->
+            <button class="bg-brand-gold/20 text-brand-gold font-medium px-4 py-2 rounded-md text-xs tracking-wider uppercase hover:bg-brand-gold/30 transition-all duration-300">
+              Small
+            </button>
+          </div>
+        </div>
+
+        <!-- Inputs -->
+        <div class="bg-brand-blue p-10">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-8 flex items-center gap-2">
+            <iconify-icon icon="solar:text-field-bold-duotone" width="16" class="text-brand-gold"></iconify-icon>
+            Inputs & Forms
+          </h4>
+
+          <div class="space-y-4">
+            <div>
+              <label class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2 block">Standard Input</label>
+              <input type="text" placeholder="Enter your text here..."
+                class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 transition-all duration-300 hover:border-white/20">
+            </div>
+            <div>
+              <label class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2 block">Select Dropdown</label>
+              <select class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white transition-all duration-300 hover:border-white/20 appearance-none cursor-pointer">
+                <option>Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card examples -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5 border border-white/5 overflow-hidden reveal">
+
+        <!-- Card 1 -->
+        <div class="bg-brand-blue p-8 group hover:bg-white/[0.02] transition-colors relative overflow-hidden min-h-[280px] flex flex-col justify-between">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="relative">
+            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-brand-gold mb-6 group-hover:border-brand-gold/50 transition-colors">
+              <iconify-icon icon="solar:chart-bold-duotone" width="22"></iconify-icon>
+            </div>
+          </div>
+          <div class="relative">
+            <h3 class="text-xl font-medium text-white tracking-tight mb-2">Analytics Card</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Dashboard-style card for metrics and KPIs visualization.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-brand-blue p-8 group hover:bg-white/[0.02] transition-colors relative overflow-hidden min-h-[280px] flex flex-col justify-between">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="relative">
+            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-brand-gold mb-6 group-hover:border-brand-gold/50 transition-colors">
+              <iconify-icon icon="solar:shield-check-bold-duotone" width="22"></iconify-icon>
+            </div>
+          </div>
+          <div class="relative">
+            <h3 class="text-xl font-medium text-white tracking-tight mb-2">Feature Card</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Informational card with icon and descriptive copy.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-brand-blue p-8 group hover:bg-white/[0.02] transition-colors relative overflow-hidden min-h-[280px] flex flex-col justify-between">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-green-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="relative">
+            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-brand-gold mb-6 group-hover:border-brand-gold/50 transition-colors">
+              <iconify-icon icon="solar:users-group-rounded-bold-duotone" width="22"></iconify-icon>
+            </div>
+          </div>
+          <div class="relative">
+            <h3 class="text-xl font-medium text-white tracking-tight mb-2">CTA Card</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Call-to-action card with button and interactive hover.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== LAYOUT & SPACING ========== -->
+  <section id="ds-layout" class="relative z-10 section-separator py-24">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Section header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 reveal">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-4 text-xs font-medium tracking-widest uppercase mb-4 text-brand-gold">
+            <span class="w-8 h-[1px] bg-brand-gold"></span>
+            Section 04
+          </div>
+          <h2 class="text-4xl md:text-5xl font-medium text-white tracking-tight leading-none mb-4">
+            Layout & Spacing
+          </h2>
+          <p class="text-lg text-slate-400 leading-relaxed font-light">
+            Grid framework examples and row/column gaps.
+          </p>
+        </div>
+      </div>
+
+      <!-- Grid demos -->
+      <div class="space-y-8 reveal">
+
+        <!-- 3-column grid -->
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">3-Column Grid</h4>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="bg-white/5 border border-white/10 rounded-lg p-6 text-center text-sm text-slate-400 font-medium hover:bg-white/10 hover:border-brand-gold/30 transition-all duration-300">
+              col-1
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-lg p-6 text-center text-sm text-slate-400 font-medium hover:bg-white/10 hover:border-brand-gold/30 transition-all duration-300">
+              col-2
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-lg p-6 text-center text-sm text-slate-400 font-medium hover:bg-white/10 hover:border-brand-gold/30 transition-all duration-300">
+              col-3
+            </div>
+          </div>
+        </div>
+
+        <!-- 2-column grid -->
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">2-Column Grid</h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white/5 border border-white/10 rounded-lg p-6 text-center text-sm text-slate-400 font-medium hover:bg-white/10 hover:border-brand-gold/30 transition-all duration-300">
+              col-1
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-lg p-6 text-center text-sm text-slate-400 font-medium hover:bg-white/10 hover:border-brand-gold/30 transition-all duration-300">
+              col-2
+            </div>
+          </div>
+        </div>
+
+        <!-- Spacing tokens -->
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">Spacing Scale</h4>
+          <div class="space-y-3">
+            <div class="flex items-center gap-4">
+              <span class="text-xs text-slate-500 w-12 font-mono">4px</span>
+              <div class="h-3 rounded bg-brand-gold/60" style="width: 16px;"></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-xs text-slate-500 w-12 font-mono">8px</span>
+              <div class="h-3 rounded bg-brand-gold/60" style="width: 32px;"></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-xs text-slate-500 w-12 font-mono">16px</span>
+              <div class="h-3 rounded bg-brand-gold/60" style="width: 64px;"></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-xs text-slate-500 w-12 font-mono">24px</span>
+              <div class="h-3 rounded bg-brand-gold/60" style="width: 96px;"></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-xs text-slate-500 w-12 font-mono">32px</span>
+              <div class="h-3 rounded bg-brand-gold" style="width: 128px;"></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-xs text-slate-500 w-12 font-mono">48px</span>
+              <div class="h-3 rounded bg-brand-gold" style="width: 192px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== MOTION & INTERACTION ========== -->
+  <section id="ds-motion" class="relative z-10 section-separator py-24">
+
+    <!-- Ambient glow -->
+    <div class="glow-blob w-[500px] h-[500px] bg-blue-600 top-0 left-0 opacity-5"></div>
+
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Section header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 reveal">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-4 text-xs font-medium tracking-widest uppercase mb-4 text-brand-gold">
+            <span class="w-8 h-[1px] bg-brand-gold"></span>
+            Section 05
+          </div>
+          <h2 class="text-4xl md:text-5xl font-medium text-white tracking-tight leading-none mb-4">
+            Motion & Interaction
+          </h2>
+          <p class="text-lg text-slate-400 leading-relaxed font-light">
+            Hover effects, transitions, and animation patterns.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-white/5 border border-white/5 overflow-hidden reveal">
+
+        <!-- Hover demo -->
+        <div class="bg-brand-blue p-10">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-6 flex items-center gap-2">
+            <iconify-icon icon="solar:cursor-square-bold-duotone" width="16" class="text-brand-gold"></iconify-icon>
+            Hover Effects
+          </h4>
+
+          <div class="space-y-4">
+            <!-- Scale hover -->
+            <div class="glass-card rounded-xl p-4 cursor-pointer hover:scale-[1.02] hover:bg-white/[0.06] transition-all duration-300">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-gold/20 flex items-center justify-center">
+                  <iconify-icon icon="solar:magnet-bold-duotone" width="16" class="text-brand-gold"></iconify-icon>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-white">Scale Transform</p>
+                  <p class="text-xs text-slate-500">Hover to scale up 2%</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Glow hover -->
+            <div class="glass-card rounded-xl p-4 cursor-pointer hover:shadow-lg hover:shadow-brand-gold/10 hover:border-brand-gold/20 transition-all duration-300">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-gold/20 flex items-center justify-center">
+                  <iconify-icon icon="solar:sun-bold-duotone" width="16" class="text-brand-gold"></iconify-icon>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-white">Glow Shadow</p>
+                  <p class="text-xs text-slate-500">Hover for golden glow</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide hover -->
+            <div class="glass-card rounded-xl p-4 cursor-pointer hover:translate-x-2 transition-all duration-300 group">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-gold/20 flex items-center justify-center">
+                  <iconify-icon icon="solar:arrow-right-bold-duotone" width="16" class="text-brand-gold group-hover:translate-x-1 transition-transform duration-300"></iconify-icon>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-white">Slide Right</p>
+                  <p class="text-xs text-slate-500">Hover to slide</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transition demos -->
+        <div class="bg-brand-blue p-10">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-6 flex items-center gap-2">
+            <iconify-icon icon="solar:play-bold-duotone" width="16" class="text-brand-gold"></iconify-icon>
+            Transitions & Timing
+          </h4>
+
+          <div class="space-y-6">
+            <!-- Timing function display -->
+            <div>
+              <p class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Easing Functions</p>
+              <div class="space-y-3">
+                <div class="flex items-center gap-4 group cursor-pointer">
+                  <span class="text-xs text-slate-500 w-24 font-mono">ease-out</span>
+                  <div class="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
+                    <div class="h-full bg-brand-gold rounded-full transition-all duration-700 ease-out w-0 group-hover:w-full"></div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4 group cursor-pointer">
+                  <span class="text-xs text-slate-500 w-24 font-mono">ease-in-out</span>
+                  <div class="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
+                    <div class="h-full bg-brand-gold-light rounded-full transition-all duration-700 ease-in-out w-0 group-hover:w-full"></div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4 group cursor-pointer">
+                  <span class="text-xs text-slate-500 w-24 font-mono">linear</span>
+                  <div class="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
+                    <div class="h-full bg-white/30 rounded-full transition-all duration-700 linear w-0 group-hover:w-full"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Duration tokens -->
+            <div>
+              <p class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Duration Tokens</p>
+              <div class="grid grid-cols-3 gap-3">
+                <div class="glass-card rounded-lg p-3 text-center">
+                  <p class="text-brand-gold font-mono text-lg font-medium">150ms</p>
+                  <p class="text-xs text-slate-500">Micro</p>
+                </div>
+                <div class="glass-card rounded-lg p-3 text-center">
+                  <p class="text-brand-gold font-mono text-lg font-medium">300ms</p>
+                  <p class="text-xs text-slate-500">Fast</p>
+                </div>
+                <div class="glass-card rounded-lg p-3 text-center">
+                  <p class="text-brand-gold font-mono text-lg font-medium">500ms</p>
+                  <p class="text-xs text-slate-500">Normal</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== ICONS ========== -->
+  <section id="ds-icons" class="relative z-10 section-separator py-24">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Section header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 reveal">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-4 text-xs font-medium tracking-widest uppercase mb-4 text-brand-gold">
+            <span class="w-8 h-[1px] bg-brand-gold"></span>
+            Section 06
+          </div>
+          <h2 class="text-4xl md:text-5xl font-medium text-white tracking-tight leading-none mb-4">
+            Icons
+          </h2>
+          <p class="text-lg text-slate-400 leading-relaxed font-light">
+            System icons used in navigation, actions, and decorative elements.
+          </p>
+        </div>
+      </div>
+
+      <!-- Icon grid -->
+      <div class="glass-card rounded-2xl p-8 reveal">
+        <div class="grid grid-cols-4 md:grid-cols-8 gap-4">
+
+          <div class="group flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer">
+            <iconify-icon icon="solar:home-2-bold-duotone" width="28" class="text-white/60 group-hover:text-brand-gold transition-colors duration-300"></iconify-icon>
+            <span class="text-[10px] text-slate-500 group-hover:text-slate-300 transition-colors">Home</span>
+          </div>
+
+          <div class="group flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer">
+            <iconify-icon icon="solar:chart-2-bold-duotone" width="28" class="text-white/60 group-hover:text-brand-gold transition-colors duration-300"></iconify-icon>
+            <span class="text-[10px] text-slate-500 group-hover:text-slate-300 transition-colors">Chart</span>
+          </div>
+
+          <div class="group flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer">
+            <iconify-icon icon="solar:user-bold-duotone" width="28" class="text-white/60 group-hover:text-brand-gold transition-colors duration-300"></iconify-icon>
+            <span class="text-[10px] text-slate-500 group-hover:text-slate-300 transition-colors">User</span>
+          </div>
+
+          <div class="group flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer">
+            <iconify-icon icon="solar:settings-bold-duotone" width="28" class="text-white/60 group-hover:text-brand-gold transition-colors duration-300"></iconify-icon>
+            <span class="text-[10px] text-slate-500 group-hover:text-slate-300 transition-colors">Settings</span>
+          </div>
+
+          <div class="group flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer">
+            <iconify-icon icon="solar:magnifer-bold-duotone" width="28" class="text-white/60 group-hover:text-brand-gold transition-colors duration-300"></iconify-icon>
+            <span class="text-[10px] text-slate-500 group-hover:text-slate-300 transition-colors">Search</span>
+          </div>
+
+          <div class="group flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer">
+            <iconify-icon icon="solar:bell-bold-duotone" width="28" class="text-white/60 group-hover:text-brand-gold transition-colors duration-300"></iconify-icon>
+            <span class="text-[10px] text-slate-500 group-hover:text-slate-300 transition-colors">Bell</span>
+          </div>
+
+          <div class="group flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer">
+            <iconify-icon icon="solar:letter-bold-duotone" width="28" class="text-white/60 group-hover:text-brand-gold transition-colors duration-300"></iconify-icon>
+            <span class="text-[10px] text-slate-500 group-hover:text-slate-300 transition-colors">Mail</span>
+          </div>
+
+          <div class="group flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer">
+            <iconify-icon icon="solar:heart-bold-duotone" width="28" class="text-white/60 group-hover:text-brand-gold transition-colors duration-300"></iconify-icon>
+            <span class="text-[10px] text-slate-500 group-hover:text-slate-300 transition-colors">Heart</span>
+          </div>
+
+        </div>
+
+        <!-- Social icons -->
+        <div class="mt-8 pt-6 border-t border-white/5">
+          <h5 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-5">Social Icons</h5>
+          <div class="flex gap-4 flex-wrap">
+            <a href="#" class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-brand-gold hover:border-brand-gold/50 hover:bg-brand-gold/10 transition-all duration-300">
+              <iconify-icon icon="mdi:facebook" width="22"></iconify-icon>
+            </a>
+            <a href="#" class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-brand-gold hover:border-brand-gold/50 hover:bg-brand-gold/10 transition-all duration-300">
+              <iconify-icon icon="mdi:instagram" width="22"></iconify-icon>
+            </a>
+            <a href="#" class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-brand-gold hover:border-brand-gold/50 hover:bg-brand-gold/10 transition-all duration-300">
+              <iconify-icon icon="mdi:linkedin" width="22"></iconify-icon>
+            </a>
+            <a href="#" class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-brand-gold hover:border-brand-gold/50 hover:bg-brand-gold/10 transition-all duration-300">
+              <iconify-icon icon="mdi:youtube" width="22"></iconify-icon>
+            </a>
+            <a href="#" class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-brand-gold hover:border-brand-gold/50 hover:bg-brand-gold/10 transition-all duration-300">
+              <iconify-icon icon="mdi:whatsapp" width="22"></iconify-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="relative z-10 py-16 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <img src="./assets/MARCA-AGENCIA-REI.svg" alt="Agência Rei" class="h-8 opacity-60">
+          <span class="text-xs text-slate-500">Living Design System v1.0</span>
+        </div>
+        <p class="text-xs text-slate-600">
+          © 2024 Agência Rei · Todos os direitos reservados
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // ===== Scroll Reveal =====
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Add delay for staggered children
+          if (entry.target.classList.contains('reveal-child')) {
+            const delay = entry.target.style.transitionDelay || '0ms';
+            entry.target.style.transitionDelay = delay;
+          }
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal, .reveal-child').forEach(el => {
+      observer.observe(el);
+    });
+
+
+    // ===== Mobile Menu Toggle =====
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+
+    // ===== Active Nav Tracking =====
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('active', 'text-white');
+            link.classList.add('text-slate-400');
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active', 'text-white');
+              link.classList.remove('text-slate-400');
+            }
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    sections.forEach(section => navObserver.observe(section));
+
+
+    // ===== Smooth scroll with offset =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offset = 80; // nav height
+          const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

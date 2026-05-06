@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualificação | Agência Rei</title>
+    <meta name="description" content="Responda algumas perguntas rápidas para agilizar o contato do nosso time comercial.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="qual-body">
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-container">
+            <img src="assets/images/logo-agencia.png" alt="Agência Rei" class="logo-header">
+        </div>
+    </header>
+
+    <main class="qual-main">
+        <div class="qual-container">
+            <!-- Intro -->
+            <div class="qual-intro reveal">
+                <h1 class="qual-title">Obrigado pelo interesse!</h1>
+                <p class="qual-subtitle">Nosso time comercial entrará em contato.</p>
+                <p class="qual-helper">Antes de agendar o nosso bate-papo, por favor responda as perguntas abaixo. Isso nos ajuda a entender seu cenário e <strong class="text-accent">agiliza o contato do nosso time comercial.</strong></p>
+            </div>
+
+            <!-- Progress -->
+            <div class="qual-progress" aria-hidden="true">
+                <div class="qual-progress-track">
+                    <div class="qual-progress-bar" id="qualProgressBar"></div>
+                </div>
+                <div class="qual-progress-meta">
+                    <span class="qual-step-label">Etapa <span id="qualCurrentStep">1</span> de <span id="qualTotalSteps">8</span></span>
+                    <span class="qual-step-percent" id="qualPercent">12%</span>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form class="qual-form glass-card" id="qualForm" novalidate>
+
+                <!-- Etapa 1: Cargo -->
+                <section class="qual-step is-active" data-step="1">
+                    <h2 class="qual-question">Você hoje é <span class="qual-emoji">👇</span></h2>
+                    <p class="qual-required">* Selecione uma opção</p>
+                    <div class="qual-options">
+                        <label class="qual-option">
+                            <input type="radio" name="cargo" value="socio-fundador" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Sócio ou Fundador</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="cargo" value="presidente-ceo" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Presidente ou CEO</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="cargo" value="diretor" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Diretor</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="cargo" value="gerente" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Gerente</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="cargo" value="colaborador" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Colaborador</span>
+                            </span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Etapa 2: Comprometimento -->
+                <section class="qual-step" data-step="2">
+                    <h2 class="qual-question">Na escala de 0 a 10, o quanto você está disposto hoje a estruturar e investir no tráfego pago da sua empresa para escalar suas vendas com crescimento sólido e previsível?</h2>
+                    <p class="qual-required">* Selecione um valor</p>
+                    <div class="qual-scale">
+                        <div class="qual-scale-grid">
+                            <label class="qual-scale-item"><input type="radio" name="comprometimento" value="1" required><span>1</span></label>
+                            <label class="qual-scale-item"><input type="radio" name="comprometimento" value="2" required><span>2</span></label>
+                            <label class="qual-scale-item"><input type="radio" name="comprometimento" value="3" required><span>3</span></label>
+                            <label class="qual-scale-item"><input type="radio" name="comprometimento" value="4" required><span>4</span></label>
+                            <label class="qual-scale-item"><input type="radio" name="comprometimento" value="5" required><span>5</span></label>
+                            <label class="qual-scale-item"><input type="radio" name="comprometimento" value="6" required><span>6</span></label>
+                            <label class="qual-scale-item"><input type="radio" name="comprometimento" value="7" required><span>7</span></label>
+                            <label class="qual-scale-item"><input type="radio" name="comprometimento" value="8" required><span>8</span></label>
+                            <label class="qual-scale-item"><input type="radio" name="comprometimento" value="9" required><span>9</span></label>
+                            <label class="qual-scale-item"><input type="radio" name="comprometimento" value="10" required><span>10</span></label>
+                        </div>
+                        <div class="qual-scale-legend">
+                            <span>Pouco disposto</span>
+                            <span>Totalmente disposto</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Etapa 3: Dores -->
+                <section class="qual-step" data-step="3">
+                    <h2 class="qual-question">Quais são os principais obstáculos que você enfrenta com os anúncios e o marketing do seu negócio hoje?</h2>
+                    <p class="qual-required">* Selecione uma opção</p>
+                    <div class="qual-options">
+                        <label class="qual-option">
+                            <input type="radio" name="obstaculo" value="leads-desqualificados" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Campanhas atraem leads desqualificados (baixa conversão)</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="obstaculo" value="metricas-roi" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Falta de clareza nas métricas e retorno sobre investimento (ROI/ROAS)</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="obstaculo" value="custo-alto" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Custo por lead/venda muito alto ou oscilando muito</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="obstaculo" value="dificuldade-escalar" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Dificuldade em escalar o orçamento sem perder resultado</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="obstaculo" value="todos-acima" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Todos acima</span>
+                            </span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Etapa 4: Instagram -->
+                <section class="qual-step" data-step="4">
+                    <h2 class="qual-question">Agora, para entender melhor o seu negócio... Nos diga, qual é o instagram da sua empresa?</h2>
+                    <p class="qual-required">* Campo obrigatório</p>
+                    <div class="qual-input-wrap">
+                        <span class="qual-input-prefix">@</span>
+                        <input type="text" name="instagram" id="qualInstagram" placeholder="Digite seu instagram" required autocomplete="off">
+                    </div>
+                </section>
+
+                <!-- Etapa 5: Colaboradores -->
+                <section class="qual-step" data-step="5">
+                    <h2 class="qual-question">Qual é o número de colaboradores da sua empresa?</h2>
+                    <p class="qual-required">* Selecione uma opção</p>
+                    <div class="qual-options">
+                        <label class="qual-option">
+                            <input type="radio" name="colaboradores" value="apenas-eu" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Apenas eu</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="colaboradores" value="1-5" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">De 1 a 5</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="colaboradores" value="5-10" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">De 5 a 10</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="colaboradores" value="10-20" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">De 10 a 20</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="colaboradores" value="20-50" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">De 20 a 50</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="colaboradores" value="acima-50" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Acima de 50</span>
+                            </span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Etapa 6: Sócio -->
+                <section class="qual-step" data-step="6">
+                    <h2 class="qual-question">Você tem sócio?</h2>
+                    <p class="qual-required">* Selecione uma opção</p>
+                    <div class="qual-options qual-options-binary">
+                        <label class="qual-option qual-option-binary">
+                            <input type="radio" name="socio" value="sim" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Sim</span>
+                            </span>
+                        </label>
+                        <label class="qual-option qual-option-binary">
+                            <input type="radio" name="socio" value="nao" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Não</span>
+                            </span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Etapa 7: Faturamento -->
+                <section class="qual-step" data-step="7">
+                    <h2 class="qual-question">Qual é a sua receita MENSAL aproximada?</h2>
+                    <p class="qual-required">* Selecione uma opção</p>
+                    <div class="qual-options">
+                        <label class="qual-option">
+                            <input type="radio" name="receita" value="abaixo-10k" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Abaixo de R$ 10 mil</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="receita" value="10-30k" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Entre R$ 10 mil a R$ 30 mil</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="receita" value="30-50k" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Entre R$ 30 mil a R$ 50 mil</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="receita" value="50-100k" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Entre R$ 50 mil a R$ 100 mil</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="receita" value="100-500k" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Entre R$ 100 mil a R$ 500 mil</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="receita" value="500k-1m" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Entre R$ 500 mil a R$ 1 milhão</span>
+                            </span>
+                        </label>
+                        <label class="qual-option">
+                            <input type="radio" name="receita" value="acima-1m" required>
+                            <span class="qual-option-content">
+                                <span class="qual-option-radio"></span>
+                                <span class="qual-option-text">Mais de R$ 1 milhão por mês</span>
+                            </span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Etapa 8: Contato -->
+                <section class="qual-step" data-step="8">
+                    <h2 class="qual-question">Maravilha! Agora sabemos ainda mais de você!</h2>
+                    <p class="qual-helper-step">Por favor, confirme seu contato para finalizar <span class="qual-emoji">👇🏽</span></p>
+
+                    <div class="qual-contact-fields">
+                        <div class="qual-input-wrap">
+                            <input type="text" name="nome" id="qualNome" placeholder="* Seu nome" required autocomplete="name">
+                        </div>
+                        <div class="qual-input-wrap">
+                            <input type="email" name="email" id="qualEmail" placeholder="* Seu melhor email" required autocomplete="email">
+                        </div>
+                        <div class="qual-input-wrap qual-input-phone">
+                            <span class="qual-phone-prefix">
+                                <span class="qual-flag" aria-hidden="true">🇧🇷</span> +55
+                            </span>
+                            <input type="tel" name="whatsapp" id="qualWhats" placeholder="* DDD + WhatsApp" required autocomplete="tel-national" inputmode="tel">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <div class="qual-nav">
+                    <button type="button" class="btn btn-outline qual-btn-back" id="qualBtnBack" disabled>VOLTAR</button>
+                    <button type="button" class="btn btn-primary qual-btn-next" id="qualBtnNext">PRÓXIMO</button>
+                    <button type="submit" class="btn btn-primary qual-btn-submit" id="qualBtnSubmit" hidden>FINALIZAR ENVIO</button>
+                </div>
+            </form>
+
+            <!-- Tela de sucesso -->
+            <div class="qual-success" id="qualSuccess" hidden>
+                <div class="qual-success-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <h2 class="qual-success-title">Recebemos suas respostas!</h2>
+                <p class="qual-success-text">Nosso time comercial entrará em contato em breve via WhatsApp para agendar o seu diagnóstico gratuito.</p>
+                <a href="index.html" class="btn btn-outline qual-success-back">VOLTAR PARA O SITE</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="qualificacao.js"></script>
+</body>
+
+</html>
