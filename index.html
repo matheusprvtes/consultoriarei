@@ -8,7 +8,7 @@
     <meta name="description" content="Sua operação de mídia está com furo. A gente te mostra onde.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -17,6 +17,7 @@
     <header class="main-header reveal">
         <div class="container header-container">
             <img src="logo-agencia.png" alt="Agência Rei" class="logo-header">
+            <div class="header-alert-tag">Diagnóstico exclusivo para empresários que faturam acima de 75 mil e desejam escalar seus processos comerciais.</div>
         </div>
     </header>
 
@@ -113,6 +114,27 @@
                     <p class="t-text text-accent" style="font-weight:bold; font-style:normal; margin-bottom: 1rem; text-transform:uppercase; font-size: 0.9rem;">Mini Case Study: SaaS Tech</p>
                     <p class="t-text" style="font-style:normal; margin-bottom: 1rem;">O cliente investia <strong>R$ 120k/mês</strong> mas via a base de leads congelada.<br>↓<br>Realizamos a Auditoria Express e encontramos uma <strong>sobreposição massiva de públicos</strong> no Meta Ads.<br>↓<br>Estratégia ajustada. <strong>O ROI saltou de 1.8x para 4.2x em apenas 3 semanas.</strong></p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases de Sucesso (carrossel infinito) -->
+    <section id="cases" class="section-primary cases-section">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 3rem;">
+                <h2 class="headline-bold">Cases de sucesso</h2>
+                <p class="sub-headline" style="max-width: 700px; margin: 0 auto;">Resultados reais que entregamos para empresas que decidiram tapar os furos da sua mídia paga.</p>
+            </div>
+        </div>
+        <div class="cases-marquee reveal">
+            <div class="cases-marquee-track marquee-track" id="casesMarqueeTrack" data-speed="0.5">
+                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_01.jpg" alt="Case de sucesso Agência Rei"></div>
+                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_02.jpg" alt="Case de sucesso Agência Rei"></div>
+                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_03.jpg" alt="Case de sucesso Agência Rei"></div>
+                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_04.jpg" alt="Case de sucesso Agência Rei"></div>
+                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_05.jpg" alt="Case de sucesso Agência Rei"></div>
+                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_06.jpg" alt="Case de sucesso Agência Rei"></div>
+                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_07.jpg" alt="Case de sucesso Agência Rei"></div>
             </div>
         </div>
     </section>
@@ -234,27 +256,6 @@
         </div>
     </section>
 
-    <!-- Dobra 6: Cases de Sucesso (carrossel infinito) -->
-    <section id="cases" class="section-primary cases-section">
-        <div class="container">
-            <div class="text-center reveal" style="margin-bottom: 3rem;">
-                <h2 class="headline-bold">Cases de sucesso</h2>
-                <p class="sub-headline" style="max-width: 700px; margin: 0 auto;">Resultados reais que entregamos para empresas que decidiram tapar os furos da sua mídia paga.</p>
-            </div>
-        </div>
-        <div class="cases-marquee reveal">
-            <div class="cases-marquee-track marquee-track" id="casesMarqueeTrack" data-speed="0.5">
-                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_01.jpg" alt="Case de sucesso Agência Rei"></div>
-                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_02.jpg" alt="Case de sucesso Agência Rei"></div>
-                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_03.jpg" alt="Case de sucesso Agência Rei"></div>
-                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_04.jpg" alt="Case de sucesso Agência Rei"></div>
-                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_05.jpg" alt="Case de sucesso Agência Rei"></div>
-                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_06.jpg" alt="Case de sucesso Agência Rei"></div>
-                <div class="case-card"><img src="carrossel-cases-de-sucesso-agencia-rei_07.jpg" alt="Case de sucesso Agência Rei"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- Dobra 7: A Oferta -->
     <section id="oferta" class="section-alt">
         <div class="container relative-container">
@@ -334,6 +335,95 @@
         </div>
     </section>
 
+    <!-- FAQ -->
+    <section id="faq" class="section-alt">
+        <div class="container">
+            <div class="section-header reveal text-center">
+                <span class="faq-tag">FAQ</span>
+                <h2 class="headline-bold">Perguntas Frequentes</h2>
+            </div>
+
+            <div class="faq-list">
+                <details class="faq-item glass-card reveal">
+                    <summary>
+                        <span class="faq-q">O que é a Sessão Estratégica de Tráfego?</span>
+                        <span class="faq-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>É uma reunião de diagnóstico (com duração média de 1 hora) onde nosso especialista vai analisar o seu cenário atual, entender os gargalos do seu marketing e desenhar um plano de ação prático focado em escalar as suas vendas com tráfego pago de forma sólida e acelerada.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item glass-card reveal" style="transition-delay: 50ms">
+                    <summary>
+                        <span class="faq-q">Para quem é essa consultoria?</span>
+                        <span class="faq-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Para empresários que já investem ou estão preparados para investir de forma profissional na internet, que buscam sair do amadorismo nas campanhas e querem previsibilidade no faturamento utilizando anúncios de alta conversão.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item glass-card reveal" style="transition-delay: 100ms">
+                    <summary>
+                        <span class="faq-q">Como funciona a assessoria/gestão de tráfego de vocês?</span>
+                        <span class="faq-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Atuamos como um braço estratégico do seu negócio, unindo gestão de tráfego avançada, orientação para criativos com alto rigor técnico e processos de marketing validados. Os detalhes de como aplicamos isso à sua realidade serão discutidos na nossa reunião.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item glass-card reveal" style="transition-delay: 150ms">
+                    <summary>
+                        <span class="faq-q">Quem fará a minha reunião de diagnóstico?</span>
+                        <span class="faq-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>A reunião será conduzida por um de nossos especialistas ou coordenadores de growth, profissionais com forte experiência prática na gestão de verbas e estruturação de funis de venda.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item glass-card reveal" style="transition-delay: 200ms">
+                    <summary>
+                        <span class="faq-q">Preciso preparar algo antes da call?</span>
+                        <span class="faq-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Apenas tenha clareza dos números atuais do seu negócio (ticket médio, faturamento, investimento atual em anúncios) e garanta que você estará em um ambiente tranquilo, de preferência no computador, para absorver a estratégia que será apresentada.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item glass-card reveal" style="transition-delay: 250ms">
+                    <summary>
+                        <span class="faq-q">A estratégia de anúncios serve para qualquer tipo de negócio?</span>
+                        <span class="faq-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Avaliamos cada operação individualmente através do seu formulário. Se entendermos que nossos frameworks de captação e escala fazem sentido para alavancar o seu modelo de negócio, nós avançaremos.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-cta reveal text-center">
+                <p class="texto-apoio" style="font-size: 1.15rem; margin-bottom: 1.5rem;">Ainda tem dúvidas?</p>
+                <a href="https://chat.agenciarei.com/quero-contratar" target="_blank" class="btn btn-primary btn-cta">AGENDAR DIAGNÓSTICO GRATUITO</a>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer section-alt">
         <div class="container footer-container">
             <!-- Coluna 1: Logo e Copyright -->
@@ -354,6 +444,7 @@
                     <li><a href="#cases">Cases</a></li>
                     <li><a href="#oferta">Oferta</a></li>
                     <li><a href="#captacao">Diagnóstico</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                 </ul>
             </div>
 
